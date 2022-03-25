@@ -31,7 +31,8 @@ function Register() {
 
     console.log(user);
     //redirect when logged in
-    if (isSuccess || user) {
+    if (isSuccess) {
+      console.log(user);
       navigate("/");
     }
 
