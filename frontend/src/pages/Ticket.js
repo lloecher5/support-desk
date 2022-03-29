@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { getTicket, reset, closeTicket } from "../features/tickets/ticketSlice";
+import { getTicket, closeTicket } from "../features/tickets/ticketSlice";
+import { getNotes, reset as notesReset } from "../features/notes/noteSlice";
 import { useEffect } from "react";
 
 import BackButton from "../components/BackButton";
@@ -14,6 +15,10 @@ function Ticket() {
     (state) => state.tickets
   );
 
+  const { notes, isLoading: notesIsLoading } = useSelector(
+    (state) => state.notes
+  );
+
   const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,6 +29,7 @@ function Ticket() {
     }
 
     dispatch(getTicket(ticketId));
+    dispatch(getNotes(ticketId));
   }, [isError, message, ticket, dispatch, ticketId]);
 
   const onTicketClose = () => {
